@@ -270,7 +270,7 @@ class AdaptiveScaffold extends StatefulWidget {
     int? selectedIndex,
     bool extended = false,
     Color? backgroundColor,
-    EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+    EdgeInsetsGeometry padding = EdgeInsets.zero,
     Widget? leading,
     Widget? trailing,
     void Function(int)? onDestinationSelected,
@@ -297,13 +297,13 @@ class AdaptiveScaffold extends StatefulWidget {
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
                     child: NavigationRail(
-                      labelType: labelType,
+                      labelType: NavigationRailLabelType.none,
                       leading: leading,
                       trailing: trailing,
                       onDestinationSelected: onDestinationSelected,
                       groupAlignment: groupAlignment,
                       backgroundColor: backgroundColor,
-                      extended: extended,
+                      extended: false,
                       selectedIndex: selectedIndex,
                       selectedIconTheme: selectedIconTheme,
                       unselectedIconTheme: unselectedIconTheme,
@@ -515,7 +515,8 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
       drawer: widget.drawerBreakpoint.isActive(context) && widget.useDrawer
           ? Drawer(
               child: NavigationRail(
-                extended: true,
+                extended: false,
+                labelType: NavigationRailLabelType.none,
                 leading: widget.leadingExtendedNavRail,
                 trailing: widget.trailingNavRail,
                 selectedIndex: widget.selectedIndex,
@@ -537,7 +538,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
             widget.mediumBreakpoint: SlotLayout.from(
               key: const Key('primaryNavigation'),
               builder: (_) => AdaptiveScaffold.standardNavigationRail(
+                extended: false,
                 width: widget.navigationRailWidth,
+                labelType: NavigationRailLabelType.none,
                 leading: widget.leadingUnextendedNavRail,
                 trailing: widget.trailingNavRail,
                 selectedIndex: widget.selectedIndex,
@@ -556,8 +559,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
             widget.largeBreakpoint: SlotLayout.from(
               key: const Key('primaryNavigation1'),
               builder: (_) => AdaptiveScaffold.standardNavigationRail(
+                labelType: NavigationRailLabelType.all,
                 width: widget.extendedNavigationRailWidth,
-                extended: true,
+                extended: false,
                 leading: widget.leadingExtendedNavRail,
                 trailing: widget.trailingNavRail,
                 selectedIndex: widget.selectedIndex,
