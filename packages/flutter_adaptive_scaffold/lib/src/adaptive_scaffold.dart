@@ -103,6 +103,7 @@ class AdaptiveScaffold extends StatefulWidget {
     this.navigationRailWidth = 72,
     this.extendedNavigationRailWidth = 192,
     this.appBarBreakpoint,
+    this.resizeToAvoidBottomInset,
   });
 
   /// The destinations to be used in navigation items. These are converted to
@@ -117,6 +118,8 @@ class AdaptiveScaffold extends StatefulWidget {
   /// Option to display a leading widget at the top of the navigation rail
   /// at the middle breakpoint.
   final Widget? leadingUnextendedNavRail;
+
+  final bool? resizeToAvoidBottomInset;
 
   /// Option to display a leading widget at the top of the navigation rail
   /// at the largest breakpoint.
@@ -508,6 +511,7 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
         Theme.of(context).navigationRailTheme;
 
     return Scaffold(
+      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       appBar: widget.drawerBreakpoint.isActive(context) && widget.useDrawer ||
               (widget.appBarBreakpoint?.isActive(context) ?? false)
           ? widget.appBar ?? AppBar()
